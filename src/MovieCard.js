@@ -1,19 +1,19 @@
 import React from 'react';
 
-const MovieCard = ({site: { id, region, image_url,nearby_town, title } }) => {
+const MovieCard = ({site,openPopup}) => {
   return (
-    <div className="movie" key={id}>
+    <div className="movie" key={site.id} onClick={() => openPopup(site.id)}>
       <div>
-        <p>{nearby_town}</p>
+        <p>{site.nearby_town}</p>
       </div>
 
       <div>
-        <img src={image_url} alt={title} />
+        <img src={site.image_url} alt={site.title} />
       </div>
 
       <div>
-        <span>{region}</span>
-        <h3>{title}</h3>
+        <span>{site.region}</span>
+        <h3>{site.title}</h3>
       </div>
     </div>
   );
