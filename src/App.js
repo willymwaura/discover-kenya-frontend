@@ -1,87 +1,93 @@
-import React, { useState, useEffect } from "react";
+import React, { useState,useEffect} from 'react'
 import axios from 'axios'
 
+import Search from './components/search'
+import Results from './components/results'
+import Popup from './components/popup'
+import   "./App.css"
 
-import Siteinfo from "./siteinfo";
-import MovieCard from "./MovieCard";
-import SearchIcon from "./search.svg";
-import "./App.css";
-
-const API_URL = "https://discover-kenya.herokuapp.com/perregion/";
-const url="https://discover-kenya.herokuapp.com/site/"
-
-const App = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [sites, setSites] = useState([]);
-
+function App() {
+  const [state, setState] = useState({
+    s: "",
+    results: [],
+    selected: {}
+  });
+  const apiurl = "https://discover-kenya.herokuapp.com/perregion/";
   useEffect(() => {
-    searchSites("all");
+    sear();
+    // eslint-disable-next-line
   }, []);
 
-  const searchSites = async (title) => {
-    const response = await fetch(`${API_URL}${title}`);
-    const data = await response.json();
-    console.log(data)
-
-    setSites(data);
-  };
   
-  const openPopup = id => {
-    axios(url +  id).then(({ data }) => {
-      let result = data;
+  const search = (e) => {
+    if (e.key === "Enter") {
+      axios(apiurl + state.s).then(({ data }) => {
+        let results = data
 
-      console.log(result);
+        setState(prevState => {
+          return { ...prevState, results: results }
+        })
+      });
+    }
+  }
+  const sear = () => {
+    
+      axios("http://discover-kenya.herokuapp.com/perregion/all").then(({ data }) => {
+        let results = data;
 
-      setSites(result)
-    });
+        setState(prevState => {
+          return { ...prevState, results: results }
+        })
+      });
   }
 
   
+  const handleInput = (e) => {
+    let s = e.target.value;
+
+
+    setState(prevState => {
+      return { ...prevState, s: s }
+    });
+  }
+   const API="http://discover-kenya.herokuapp.com/site/"
+  const openPopup = id => {
+    axios(API+id).then(({ data }) => {
+      let result = data;
+
+      setState(prevState => {
+        return { ...prevState, selected: result }
+      });
+    });
+  }
+
+  const closePopup = () => {
+    setState(prevState => {
+      return { ...prevState, selected: {} }
+    });
+  }
 
   return (
-      
-
     <div className="app">
-      <h1>Discover KENYA</h1>
-
-      <div className="search">
-        <input
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Enter the province you want to visit"
-        />
-        <img
-          src={SearchIcon}
-          alt="search"
-          onClick={() => searchSites(searchTerm)}
-        />
-      </div>
+      <header>
+        <h1>Discover Kenya</h1>
+      </header>
       
-      
-
-      {sites?.length > 0 ? (
-        <div className="container">
-          {sites.map((site) => ( 
-            <MovieCard site={site} key={site.id} openPopup={openPopup}/>
-            
-          ))}
-        {(typeof state.site.title != "undefined") ? <Siteinfo selected={state.site} /> : false}
-        
+        <div >
+          
+           < Search handleInput={handleInput} search={search} />
+          
         </div>
-        
-    
-      ) : (
-        <div className="empty">
-          <h2>No site  found</h2>
+        <div>
+        <Results results={state.results} openPopup={openPopup} />
         </div>
-      )}
-      </div>
-   
-  )
-};
 
-export default App;
-    
-
-   
+        {(typeof state.selected.title != "undefined") ? <Popup selected={state.selected} closePopup={closePopup} /> : false}
   
+      
+      
+    </div>
+  );
+}
+
+export default App
