@@ -32,7 +32,7 @@ function App() {
   }
   const sear = () => {
     
-      axios("http://discover-kenya.herokuapp.com/perregion/all").then(({ data }) => {
+      axios("https://discover-kenya.herokuapp.com/perregion/all").then(({ data }) => {
         let results = data;
 
         setState(prevState => {
@@ -50,7 +50,7 @@ function App() {
       return { ...prevState, s: s }
     });
   }
-   const API="http://discover-kenya.herokuapp.com/site/"
+   const API="https://discover-kenya.herokuapp.com/site/"
   const openPopup = id => {
     axios(API+id).then(({ data }) => {
       let result = data;
