@@ -12,6 +12,8 @@ function Popup({ selected, closePopup }) {
 					<img src={selected.image_url}alt={selected.title} width="250"height="450"/>
 					<p>
 					<p>nearby_town: {selected.nearby_town}</p>
+					<p>people experiences:</p>
+					<p>{selected.experience}</p>
 					<p>current weather :&nbsp;<img src={selected.weather_url} alt={selected.title}width="50"height="50"/>&nbsp; {selected.weather_text}</p>
 					<p>current temperature : &nbsp;{selected.degree_celcius}</p>
 					<p><a href={url+selected.id} >see map</a> </p></p>
