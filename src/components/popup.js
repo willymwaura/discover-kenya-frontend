@@ -21,7 +21,7 @@ function Popup({ selected, closePopup }) {
 					<p>{dataarray.join('\n')}</p>
 					<p>current weather :&nbsp;<img src={selected.weather_url} alt={selected.title}width="50"height="50"/>&nbsp; {selected.weather_text}</p>
 					<p>current temperature : &nbsp;{selected.degree_celcius}</p>
-					<p><a href={url+selected.id} >see map</a> </p></p>
+					<p><a href={url+selected.id} target="_blank" >see map</a> </p></p>
 
 				</div>
 				<button className="close" onClick={closePopup}>Close</button>
