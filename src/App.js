@@ -12,16 +12,20 @@ function App() {
     results: [],
     selected: {}
   });
-  const apiurl = "https://discover-kenya.herokuapp.com/perregion/";
+ 
   useEffect(() => {
     sear();
     // eslint-disable-next-line
   }, []);
+  const requestoptions={
+    headers:{ "Authorization": " Bearer 93b0f00ab0a8a1097848f31b86a61310f2c8e3ff"}
+  }
+  const apiurl = "https://discover-kenya.herokuapp.com/perregion/"
 
   
   const search = (e) => {
     if (e.key === "Enter") {
-      axios(apiurl + state.s).then(({ data }) => {
+      axios((apiurl+ state.s),requestoptions).then(({ data }) => {
         let results = data
 
         setState(prevState => {
@@ -32,7 +36,7 @@ function App() {
   }
   const sear = () => {
     
-      axios("https://discover-kenya.herokuapp.com/perregion/all").then(({ data }) => {
+      axios("https://discover-kenya.herokuapp.com/perregion/all",requestoptions).then(({ data }) => {
         let results = data;
 
         setState(prevState => {
@@ -52,7 +56,7 @@ function App() {
   }
    const API="https://discover-kenya.herokuapp.com/site/"
   const openPopup = id => {
-    axios(API+id).then(({ data }) => {
+    axios((API+id),requestoptions).then(({ data }) => {
       let result = data;
 
       setState(prevState => {
