@@ -18,7 +18,7 @@ function App() {
     // eslint-disable-next-line
   }, []);
   const requestoptions={
-    headers:{ "Authorization": " Bearer 8c475992135c5d0cd39c908e2e7141abaf86599b"}
+    headers:{ "Authorization": " token  8c475992135c5d0cd39c908e2e7141abaf86599b"}
   }
   const apiurl = "https://discover-kenya.herokuapp.com/perregion/"
 
@@ -38,6 +38,7 @@ function App() {
     
       axios("https://discover-kenya.herokuapp.com/perregion/all",requestoptions).then(({ data }) => {
         let results = data;
+        console.log(results)
 
         setState(prevState => {
           return { ...prevState, results: results }
