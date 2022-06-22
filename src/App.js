@@ -18,7 +18,7 @@ function App() {
     // eslint-disable-next-line
   }, []);
   const requestoptions={
-    headers:{ "Authorization": " Bearer 93b0f00ab0a8a1097848f31b86a61310f2c8e3ff"}
+    headers:{ "Authorization": " Bearer 8c475992135c5d0cd39c908e2e7141abaf86599b"}
   }
   const apiurl = "https://discover-kenya.herokuapp.com/perregion/"
 
