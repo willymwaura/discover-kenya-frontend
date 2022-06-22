@@ -3,7 +3,7 @@ import React from 'react'
  const url="https://discover-kenya.herokuapp.com/map/"
  const url1="https://discover-kenya.herokuapp.com/addexperience/"
  const requestoptions={
-	headers:{ "Authorization": " Bearer 93b0f00ab0a8a1097848f31b86a61310f2c8e3ff"}
+	headers:{ "Authorization": " 8c475992135c5d0cd39c908e2e7141abaf86599b"}
   }
 
  
